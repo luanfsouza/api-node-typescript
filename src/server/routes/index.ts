@@ -1,18 +1,19 @@
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
+import { CidadesController, PessoasController } from "./../controllers";
+
 const router = Router();
 
 router.get("/", (req, res) => {
-  return res.send("ola mundo DEV!!!!");
+  return res.send("pagina inicial");
 });
 
-router.post("/teste", (req, res) => {
-  //console.log(req.params.id);
-  //console.log(req.query.teste);
-  //console.log(req.cookies);
-
-  return res.status(StatusCodes.BAD_GATEWAY).json(req.body);
-});
+router.post(
+  "/cidades",
+  CidadesController.createBodyValidator,
+  CidadesController.createQueryValidator,
+  CidadesController.create
+);
 
 export { router };
